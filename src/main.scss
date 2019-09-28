@@ -1,0 +1,139 @@
+$blanco: #e4e4e4;
+$negro: #222222;
+$azul: #045757;
+$azul-oscuro: rgba(4, 67, 67, 0.15);
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+::-ms-scrollbar {
+  display: none;
+}
+::-moz-scrollbar {
+  display: none;
+}
+
+body {
+  color: $blanco;
+  background: $negro;
+  font-family: "Roboto Condensed", sans-serif;
+  display: grid;
+  height: 100vh;
+  width: 100%;
+  grid-template-rows: 10vh 1fr;
+  grid-template-columns: repeat(5, 1fr);
+  justify-items: center;
+  align-items: center;
+  .scramble_bar {
+    background: $azul-oscuro;
+    grid-row: 1/2;
+    grid-column: 1/6;
+    align-self: end;
+    font-size: 2.5rem;
+    padding: 1rem 10rem;
+  }
+  .lista_tiempos {
+    background: $azul-oscuro;
+    grid-row: 2/3;
+    grid-column: 1/2;
+    margin-bottom: 25px;
+    height: 320px;
+    overflow-y: scroll;
+    table {
+      text-align: center;
+      tr {
+        th {
+          padding: 1rem;
+        }
+        td {
+          padding: 1rem;
+        }
+      }
+    }
+  }
+  .main_timer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    grid-row: 2/3;
+    grid-column: 1/6;
+    font-size: 20rem;
+    .main_a05 {
+      font-size: 5rem;
+    }
+  }
+}
+
+@media screen and (max-width: 1170px) {
+  body {
+    .scramble_bar {
+      font-size: 1.5rem;
+      padding: 0.5rem 5rem;
+    }
+    .lista_tiempos {
+      margin-bottom: 25px;
+      height: 180px;
+      table {
+        tr {
+          th {
+            padding: 0.25rem;
+          }
+          td {
+            padding: 0.25rem;
+          }
+        }
+      }
+    }
+    .main_timer {
+      font-size: 12rem;
+      .main_a05 {
+        font-size: 3rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 690px) {
+  body {
+    .scramble_bar {
+      font-size: 1.25rem;
+      padding: 0.25rem 2rem;
+    }
+    .lista_tiempos {
+      margin-bottom: 25px;
+      height: 150px;
+      table {
+        tr {
+          th {
+            padding: 0.15rem;
+          }
+          td {
+            padding: 0.15rem;
+          }
+        }
+      }
+    }
+    .main_timer {
+      font-size: 8rem;
+      .main_a05 {
+        font-size: 2rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 490px) {
+  body {
+    .lista_tiempos {
+      display: none;
+    }
+  }
+}
