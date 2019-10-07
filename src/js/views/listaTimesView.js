@@ -6,5 +6,4 @@ export const renderTimeEnTabla = time => {
   const newTr = document.createElement("tr");
   newTr.appendChild(newTd);
   elements.listaTiempos.insertBefore(newTr, elements.listaTiempos.children[1]);
-  console.log(elements.listaTiempos);
 };

@@ -4,7 +4,6 @@ import { elements } from "../elements";
 export default class Timer {
   constructor(state) {
     this.state = state;
-    this.state.listaTiempos = [];
   }
   cogerTiempo() {
     const tiempoActual = new Date();
@@ -34,10 +33,9 @@ export default class Timer {
     this.state.tiempoFinal = this.cogerTiempo();
     const tiempoTotal = this.state.tiempoFinal - this.state.tiempoInicial;
     const tiempoTotalFormateado = this.formatearNumero(tiempoTotal);
-    timerView.renderTiempoFormateado(tiempoTotalFormateado);
     elements.numerosTimer.style.color = "#e4e4e4";
     elements.webAppContainer.style.display = "grid";
     this.state.estado.active = false;
-    console.log(this.state);
+    return tiempoTotalFormateado;
   }
 }
