@@ -17,7 +17,7 @@ export default class Timer {
     const numeroDecimal = numeroFormatArray[1];
     const decimalFormateado = `.${numeroDecimal.slice(0, 2)}`;
     if (numeroSinDecimal >= 60) {
-      let segundaos;
+      let segundos;
       let minutos;
       minutos = `${Math.floor(numeroSinDecimal / 60)}:`;
       segundos = `${numeroSinDecimal % 60}`;
