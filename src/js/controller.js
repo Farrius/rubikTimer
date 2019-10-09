@@ -47,7 +47,8 @@ const actualizarTimer = () => {
   const tiempo = timer.pararTimer();
   timerView.renderTiempoFormateado(tiempo);
   state.listaTiempos.subirAlState(tiempo);
-  state.listaTiempos.mediaA05(state.listaTiempos.lista);
+  const mediaAo5 = state.listaTiempos.mediaA05(state.listaTiempos.lista);
+  console.log(mediaAo5);
   listaTimesView.renderTimeEnTabla(tiempo);
 };
 //events del timer
