@@ -6,7 +6,6 @@ export default class ListaTimes {
     this.lista = [];
   }
   formatearSegundosMinutos(tiempo) {
-    console.log(tiempo);
     if (tiempo > 60) {
       return `${Math.floor(tiempo / 60)}:${Math.round((tiempo % 60) * 100) /
         100}`;
@@ -28,7 +27,10 @@ export default class ListaTimes {
       (accumulator, cur) => accumulator + cur,
       0
     );
-    return sumaArrayMedias / arrayMedias.length;
+    const mediaArray = this.formatearSegundosMinutos(
+      sumaArrayMedias / arrayMedias.length
+    );
+    return mediaArray;
   }
   mediaA05(tiempos) {
     if (this.lista.length >= 5) {
@@ -56,8 +58,12 @@ export default class ListaTimes {
       const indexBajo = ultimos5.indexOf(masBajo);
       ultimos5.splice(indexBajo, 1);
       const mediaAo5 = this.hacerMediaArray(ultimos5);
-      const mediaAo5Format = this.formatearSegundosMinutos(mediaAo5);
-      return mediaAo5Format;
+      return mediaAo5;
+    } else if (this.lista.length > 0) {
+      return this.hacerMediaArray(this.lista);
     }
+  }
+  mediaAll(tiempos) {
+    return this.hacerMediaArray(tiempos);
   }
 }

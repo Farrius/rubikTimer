@@ -48,8 +48,8 @@ const actualizarTimer = () => {
   timerView.renderTiempoFormateado(tiempo);
   state.listaTiempos.subirAlState(tiempo);
   const mediaAo5 = state.listaTiempos.mediaA05(state.listaTiempos.lista);
-  console.log(mediaAo5);
-  listaTimesView.renderTimeEnTabla(tiempo);
+  const mediaAoAll = state.listaTiempos.mediaAll(state.listaTiempos.lista);
+  listaTimesView.renderTimeEnTabla(tiempo, mediaAo5, mediaAoAll);
 };
 //events del timer
 window.addEventListener("keydown", timerController);
