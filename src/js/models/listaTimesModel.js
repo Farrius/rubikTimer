@@ -1,8 +1,5 @@
-import { elements } from "../elements";
-import { cpus } from "os";
-
 export default class ListaTimes {
-  constructor(tiempo) {
+  constructor() {
     this.lista = [];
   }
   formatearSegundosMinutos(tiempo) {

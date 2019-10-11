@@ -2,13 +2,23 @@ import "../main.scss";
 import { elements } from "./elements";
 import * as timerView from "./views/timerView";
 import * as listaTimesView from "./views/listaTimesView";
+import * as ao5View from "./views/ao5View";
+import * as scrambleView from "./views/scrambleView";
 import Timer from "./models/timerModel";
 import ListaTiempos from "./models/listaTimesModel";
+import Scramble from "./models/scrambleModel";
 // estado de la app
 const state = {};
 let timer;
 state.estado = [];
 state.listaTiempos = new ListaTiempos();
+//hacer scramble
+const funcionDelScramble = () => {
+  const scrambleObject = new Scramble();
+  const scramble = scrambleObject.hacerScramble();
+  scrambleView.renderScramble(scramble);
+};
+
 //estado del timer
 state.estado.active = false;
 state.estado.start = true;
@@ -50,21 +60,10 @@ const actualizarTimer = () => {
   const mediaAo5 = state.listaTiempos.mediaA05(state.listaTiempos.lista);
   const mediaAoAll = state.listaTiempos.mediaAll(state.listaTiempos.lista);
   listaTimesView.renderTimeEnTabla(tiempo, mediaAo5, mediaAoAll);
+  ao5View.renderAo5(mediaAo5);
+  funcionDelScramble();
 };
 //events del timer
 window.addEventListener("keydown", timerController);
 window.addEventListener("keyup", startTimer);
-
-const test = new ListaTiempos();
-test.mediaA05([
-  "0.01",
-  "0.07",
-  "3.8",
-  "0.08",
-  "0.06",
-  "1",
-  "121.13312",
-  "622.1231312",
-  "131.123132",
-  "141.12312"
-]);
+window.addEventListener("load", funcionDelScramble);

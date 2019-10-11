@@ -1,4 +1,3 @@
-import * as timerView from "../views/timerView";
 import { elements } from "../elements";
 
 export default class Timer {
