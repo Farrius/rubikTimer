@@ -1,15 +1,11 @@
 import { elements } from "../elements";
 
 export const renderTimeEnTabla = (time, ao5, aoAll) => {
-  const markup = `
-  <tr>
-    <td >${time}</td>
-    <td>${ao5}</td>
-    <td>
-    ${aoAll}<a href="#"><i class="fa fa-close"></i></a>
-    </td>
-  </tr>
-  
-  `;
-  elements.listaTiempos.insertAdjacentHTML("afterbegin", markup);
+  const newRow = elements.listaTiempos.insertRow(1);
+  const newTimeTd = newRow.insertCell(0);
+  const newAo5Td = newRow.insertCell(1);
+  const newAoAll = newRow.insertCell(2);
+  newTimeTd.textContent = time;
+  newAo5Td.textContent = ao5;
+  newAoAll.textContent = aoAll;
 };

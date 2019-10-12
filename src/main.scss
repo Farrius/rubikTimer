@@ -21,50 +21,6 @@ $azul-oscuro: rgba(4, 67, 67, 0.15);
   display: none;
 }
 
-@mixin table_styles {
-  text-align: center;
-  tr {
-    th {
-      padding: 1rem;
-      padding-bottom: 0;
-    }
-    td {
-      padding: 1rem;
-      a:link,
-      a:visited,
-      a:hover,
-      a:active {
-        text-decoration: none;
-        color: $azul;
-        margin-left: 1px;
-      }
-    }
-  }
-}
-
-@mixin table_styles_1170() {
-  tr {
-    th {
-      padding: 0.25rem;
-      padding-bottom: 0;
-    }
-    td {
-      padding: 0.25rem;
-    }
-  }
-}
-
-@mixin table_styles_710() {
-  tr {
-    th {
-      padding: 0.15rem;
-      padding-bottom: 0;
-    }
-    td {
-      padding: 0.15rem;
-    }
-  }
-}
 body {
   background: $negro;
   .web_app_container {
@@ -93,11 +49,29 @@ body {
       margin-bottom: 25px;
       height: 320px;
       overflow-y: scroll;
-      .tabla_header {
-        @include table_styles();
-      }
       .tabla_de_tiempos {
-        @include table_styles();
+        tr {
+          th {
+            padding: 1rem;
+            padding-bottom: 0.35rem;
+          }
+          td {
+            border: 1px solid $negro;
+            padding: 1rem;
+            a:link,
+            a:visited,
+            a:hover,
+            a:active {
+              text-decoration: none;
+              color: $azul;
+              margin-left: 1px;
+            }
+          }
+          .delete {
+            border: none;
+            padding: 0;
+          }
+        }
       }
     }
     .main_timer {
@@ -125,13 +99,6 @@ body {
         font-size: 0.8rem;
         margin-bottom: 25px;
         height: 150px;
-        .tabla_header {
-          @include table_styles_1170();
-          padding-bottom: 0;
-        }
-        .tabla_de_tiempos {
-          @include table_styles_1170();
-        }
       }
       .main_timer {
         font-size: 8rem;
@@ -153,12 +120,6 @@ body {
         margin-bottom: 25px;
         height: 105px;
         font-size: 0.58rem;
-        .tabla_header {
-          @include table_styles_710();
-        }
-        .tabla_de_tiempos {
-          @include table_styles_710();
-        }
       }
       .main_timer {
         font-size: 5.4rem;

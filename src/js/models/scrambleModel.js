@@ -34,7 +34,7 @@ export default class Sramble {
       }
       for (const cur of listaSinLastMove) {
         if (cur[0] === firstLetter[0]) {
-          for (let i = 0; i < 22; i++) {
+          for (let i = 0; i < 21; i++) {
             indexLetters.push(listaOnlyLetters.indexOf(cur[0], i));
           }
         }
