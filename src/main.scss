@@ -98,7 +98,17 @@ body {
       .lista_tiempos {
         font-size: 0.8rem;
         margin-bottom: 25px;
-        height: 150px;
+        height: 250px;
+        .tabla_de_tiempos {
+          tr {
+            th {
+              padding: 0.5rem;
+            }
+            td {
+              padding: 0.75rem;
+            }
+          }
+        }
       }
       .main_timer {
         font-size: 8rem;
@@ -118,8 +128,18 @@ body {
       }
       .lista_tiempos {
         margin-bottom: 25px;
-        height: 105px;
+        height: 177.5px;
         font-size: 0.58rem;
+        .tabla_de_tiempos {
+          tr {
+            th {
+              padding: 0.25rem;
+            }
+            td {
+              padding: 0.5rem;
+            }
+          }
+        }
       }
       .main_timer {
         font-size: 5.4rem;
