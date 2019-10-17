@@ -63,4 +63,7 @@ export default class ListaTimes {
   mediaAll(tiempos) {
     return this.hacerMediaArray(tiempos);
   }
+  resetLista() {
+    this.lista = [];
+  }
 }

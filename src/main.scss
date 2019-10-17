@@ -42,35 +42,52 @@ body {
       font-size: 2.5rem;
       padding: 1rem 10rem;
     }
-    .lista_tiempos {
-      background: $azul-oscuro;
+    .posicion_lista_tiempos {
       grid-row: 2/3;
       grid-column: 1/2;
-      margin-bottom: 25px;
-      height: 320px;
-      overflow-y: scroll;
-      .tabla_de_tiempos {
-        tr {
-          th {
-            padding: 1rem;
-            padding-bottom: 0.35rem;
-          }
-          td {
-            border: 1px solid $negro;
-            padding: 1rem;
-            a:link,
-            a:visited,
-            a:hover,
-            a:active {
-              text-decoration: none;
-              color: $azul;
-              margin-left: 1px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .lista_tiempos {
+        background: $azul-oscuro;
+        margin-bottom: 25px;
+        height: 320px;
+        min-width: 155px;
+        overflow-y: scroll;
+        .tabla_de_tiempos {
+          tr {
+            th {
+              padding: 1rem;
+              padding-bottom: 0.35rem;
+            }
+            td {
+              border: 1px solid $negro;
+              padding: 1rem;
+              a:link,
+              a:visited,
+              a:hover,
+              a:active {
+                text-decoration: none;
+                color: $azul;
+                margin-left: 1px;
+              }
+            }
+            .delete {
+              border: none;
+              padding: 0;
             }
           }
-          .delete {
-            border: none;
-            padding: 0;
-          }
+        }
+      }
+      form {
+        .reset_button {
+          color: white;
+          border: none;
+          cursor: pointer;
+          outline: none;
+          background: $azul-oscuro;
+          padding: 1.5rem;
+          border-radius: 50px;
         }
       }
     }
@@ -95,18 +112,26 @@ body {
         font-size: 1.5rem;
         padding: 0.5rem 5rem;
       }
-      .lista_tiempos {
-        font-size: 0.8rem;
-        margin-bottom: 25px;
-        height: 250px;
-        .tabla_de_tiempos {
-          tr {
-            th {
-              padding: 0.5rem;
+      .posicion_lista_tiempos {
+        .lista_tiempos {
+          font-size: 0.8rem;
+          margin-bottom: 25px;
+          height: 250px;
+          min-width: 122px;
+          .tabla_de_tiempos {
+            tr {
+              th {
+                padding: 0.5rem;
+              }
+              td {
+                padding: 0.75rem;
+              }
             }
-            td {
-              padding: 0.75rem;
-            }
+          }
+        }
+        form {
+          .reset_button {
+            padding: 1rem;
           }
         }
       }
@@ -126,18 +151,26 @@ body {
         font-size: 1.25rem;
         padding: 0.25rem 2rem;
       }
-      .lista_tiempos {
-        margin-bottom: 25px;
-        height: 177.5px;
-        font-size: 0.58rem;
-        .tabla_de_tiempos {
-          tr {
-            th {
-              padding: 0.25rem;
+      .posicion_lista_tiempos {
+        .lista_tiempos {
+          margin-bottom: 25px;
+          height: 177.5px;
+          font-size: 0.58rem;
+          min-width: 88px;
+          .tabla_de_tiempos {
+            tr {
+              th {
+                padding: 0.25rem;
+              }
+              td {
+                padding: 0.5rem;
+              }
             }
-            td {
-              padding: 0.5rem;
-            }
+          }
+        }
+        form {
+          .reset_button {
+            padding: 0.5rem;
           }
         }
       }
@@ -153,8 +186,13 @@ body {
 @media screen and (max-width: 490px) {
   body {
     .web_app_container {
-      .lista_tiempos {
-        display: none;
+      .posicion_lista_tiempos {
+        .lista_tiempos {
+          display: none;
+        }
+        form {
+          display: none;
+        }
       }
     }
   }

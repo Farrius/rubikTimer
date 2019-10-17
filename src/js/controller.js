@@ -52,7 +52,7 @@ const timerController = () => {
     actualizarTimer();
   }
 };
-
+//al acabar cada ciclo de timer
 const actualizarTimer = () => {
   const tiempo = timer.pararTimer();
   timerView.renderTiempoFormateado(tiempo);
@@ -63,7 +63,14 @@ const actualizarTimer = () => {
   ao5View.renderAo5(mediaAo5);
   funcionDelScramble();
 };
+//al querer resetear el timer
+const resetTodo = () => {
+  listaTimesView.resetTabla();
+  state.listaTiempos.resetLista();
+};
 //events del timer
 window.addEventListener("keydown", timerController);
 window.addEventListener("keyup", startTimer);
 window.addEventListener("load", funcionDelScramble);
+//events de la app
+elements.resetButton.addEventListener("click", resetTodo);
