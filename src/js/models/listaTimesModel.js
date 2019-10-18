@@ -14,9 +14,9 @@ export default class ListaTimes {
     if (tiempo.includes(":")) {
       const arrayNum = tiempo.split(":");
       const tiempoSec = parseInt(arrayNum[0] * 60) + parseFloat(arrayNum[1]);
-      this.lista.push(tiempoSec);
+      this.lista.unshift(tiempoSec);
     } else {
-      this.lista.push(parseFloat(tiempo));
+      this.lista.unshift(parseFloat(tiempo));
     }
   }
   hacerMediaArray(arrayMedias) {
@@ -31,7 +31,7 @@ export default class ListaTimes {
   }
   mediaA05(tiempos) {
     if (this.lista.length >= 5) {
-      const ultimos5 = tiempos.slice(tiempos.length - 5, tiempos.length);
+      const ultimos5 = tiempos.slice(0, 5);
       const masBajo = ultimos5.reduce((accumulator, cur) => {
         if (accumulator === -1) {
           return cur;

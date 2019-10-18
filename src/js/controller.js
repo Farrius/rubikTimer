@@ -74,3 +74,10 @@ window.addEventListener("keyup", startTimer);
 window.addEventListener("load", funcionDelScramble);
 //events de la app
 elements.resetButton.addEventListener("click", resetTodo);
+elements.listaTiempos.addEventListener("click", e => {
+  const row = e.target.parentElement.matches(".row");
+  if (row) {
+    const actualRow = e.target.parentElement;
+    actualRow.parentElement.removeChild(actualRow);
+  }
+});
