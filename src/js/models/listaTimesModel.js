@@ -19,6 +19,9 @@ export default class ListaTimes {
       this.lista.unshift(parseFloat(tiempo));
     }
   }
+  quitarDelState(indexElement) {
+    this.lista.splice(indexElement, 1);
+  }
   hacerMediaArray(arrayMedias) {
     const sumaArrayMedias = arrayMedias.reduce(
       (accumulator, cur) => accumulator + cur,

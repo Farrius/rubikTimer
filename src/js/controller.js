@@ -78,6 +78,10 @@ elements.listaTiempos.addEventListener("click", e => {
   const row = e.target.parentElement.matches(".row");
   if (row) {
     const actualRow = e.target.parentElement;
+    const tableNode = actualRow.parentNode.children;
+    const tableArray = [...tableNode];
+    const indexElement = tableArray.indexOf(actualRow);
+    state.listaTiempos.quitarDelState(indexElement);
     actualRow.parentElement.removeChild(actualRow);
   }
 });
