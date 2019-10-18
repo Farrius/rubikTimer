@@ -2,6 +2,7 @@ export default class ListaTimes {
   constructor() {
     this.lista = [];
   }
+  //formateo
   formatearSegundosMinutos(tiempo) {
     if (tiempo > 60) {
       return `${Math.floor(tiempo / 60)}:${Math.round((tiempo % 60) * 100) /
@@ -10,18 +11,23 @@ export default class ListaTimes {
       return `${Math.round(tiempo * 100) / 100}`;
     }
   }
+  //state methods
   subirAlState(tiempo) {
     if (tiempo.includes(":")) {
       const arrayNum = tiempo.split(":");
       const tiempoSec = parseInt(arrayNum[0] * 60) + parseFloat(arrayNum[1]);
       this.lista.unshift(tiempoSec);
+      this.ponerLocalStorage();
     } else {
       this.lista.unshift(parseFloat(tiempo));
+      this.ponerLocalStorage();
     }
   }
   quitarDelState(indexElement) {
     this.lista.splice(indexElement, 1);
+    this.ponerLocalStorage();
   }
+  //calculo de medias
   hacerMediaArray(arrayMedias) {
     const sumaArrayMedias = arrayMedias.reduce(
       (accumulator, cur) => accumulator + cur,
@@ -35,24 +41,8 @@ export default class ListaTimes {
   mediaA05(tiempos) {
     if (this.lista.length >= 5) {
       const ultimos5 = tiempos.slice(0, 5);
-      const masBajo = ultimos5.reduce((accumulator, cur) => {
-        if (accumulator === -1) {
-          return cur;
-        } else if (accumulator > cur) {
-          return cur;
-        } else {
-          return accumulator;
-        }
-      }, -1);
-      const masAlto = ultimos5.reduce((accumulator, cur) => {
-        if (accumulator === -1) {
-          return cur;
-        } else if (accumulator < cur) {
-          return cur;
-        } else {
-          return accumulator;
-        }
-      }, -1);
+      const masBajo = Math.min(...ultimos5);
+      const masAlto = Math.max(...ultimos5);
       const indexAlto = ultimos5.indexOf(masAlto);
       ultimos5.splice(indexAlto, 1);
       const indexBajo = ultimos5.indexOf(masBajo);
@@ -66,7 +56,19 @@ export default class ListaTimes {
   mediaAll(tiempos) {
     return this.hacerMediaArray(tiempos);
   }
+  //resetLista
   resetLista() {
     this.lista = [];
+  }
+  //localStorage
+  ponerLocalStorage() {
+    localStorage.setItem("tiempos", JSON.stringify(this.lista));
+  }
+  cogerLocalStorage() {
+    const storage = JSON.parse(localStorage.getItem("tiempos"));
+    if (storage) this.lista = storage;
+  }
+  resetLocalStorage() {
+    localStorage.clear();
   }
 }

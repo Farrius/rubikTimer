@@ -12,13 +12,6 @@ const state = {};
 let timer;
 state.estado = [];
 state.listaTiempos = new ListaTiempos();
-//hacer scramble
-const funcionDelScramble = () => {
-  const scrambleObject = new Scramble();
-  const scramble = scrambleObject.hacerScramble();
-  scrambleView.renderScramble(scramble);
-};
-
 //estado del timer
 state.estado.active = false;
 state.estado.start = true;
@@ -54,26 +47,40 @@ const timerController = () => {
 };
 //al acabar cada ciclo de timer
 const actualizarTimer = () => {
+  //parar timer
   const tiempo = timer.pararTimer();
-  timerView.renderTiempoFormateado(tiempo);
   state.listaTiempos.subirAlState(tiempo);
+  //render los tiempos
+  renderLosTiempos(tiempo);
+  //poner scramble
+  funcionDelScramble();
+};
+//render los tiempos
+const renderLosTiempos = tiempo => {
+  timerView.renderTiempoFormateado(tiempo);
   const mediaAo5 = state.listaTiempos.mediaA05(state.listaTiempos.lista);
   const mediaAoAll = state.listaTiempos.mediaAll(state.listaTiempos.lista);
   listaTimesView.renderTimeEnTabla(tiempo, mediaAo5, mediaAoAll);
   ao5View.renderAo5(mediaAo5);
-  funcionDelScramble();
 };
-//al querer resetear el timer
-const resetTodo = () => {
-  listaTimesView.resetTabla();
-  state.listaTiempos.resetLista();
+//hacer scramble
+const funcionDelScramble = () => {
+  const scrambleObject = new Scramble();
+  const scramble = scrambleObject.hacerScramble();
+  scrambleView.renderScramble(scramble);
 };
 //events del timer
 window.addEventListener("keydown", timerController);
 window.addEventListener("keyup", startTimer);
 window.addEventListener("load", funcionDelScramble);
 //events de la app
-elements.resetButton.addEventListener("click", resetTodo);
+//resetear timer
+elements.resetButton.addEventListener("click", () => {
+  listaTimesView.resetTabla();
+  state.listaTiempos.resetLista();
+  state.listaTiempos.resetLocalStorage();
+});
+//quitar un tiempo
 elements.listaTiempos.addEventListener("click", e => {
   const row = e.target.parentElement.matches(".row");
   if (row) {
@@ -84,4 +91,11 @@ elements.listaTiempos.addEventListener("click", e => {
     state.listaTiempos.quitarDelState(indexElement);
     actualRow.parentElement.removeChild(actualRow);
   }
+});
+//cargar local storage
+window.addEventListener("load", () => {
+  state.listaTiempos.cogerLocalStorage();
+  state.listaTiempos.lista.reverse().forEach(cur => {
+    renderLosTiempos(cur);
+  });
 });
