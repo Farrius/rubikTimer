@@ -34,7 +34,6 @@ export default class Timer {
     const tiempoTotalFormateado = this.formatearNumero(tiempoTotal);
     elements.numerosTimer.style.color = "#e4e4e4";
     elements.webAppContainer.style.display = "grid";
-    this.state.estado.active = false;
     return tiempoTotalFormateado;
   }
 }

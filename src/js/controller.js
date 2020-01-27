@@ -14,36 +14,41 @@ state.estado = [];
 state.listaTiempos = new ListaTiempos();
 //estado del timer
 state.estado.active = false;
-state.estado.start = true;
+state.estado.ready = false;
+//cambiar el color mientras pulsamos o parar el timer
+const timerController = () => {
+  if (event.keyCode === 32 && state.estado.active === false) {
+    setTimeout(() => (state.estado.ready = true), 2000);
+    if (state.estado.ready === true) {
+      window.addEventListener("keyup", startTimer);
+      elements.numerosTimer.style.color = "#045757";
+    }
+  } else if (event.keyCode === 32 && state.estado.active === true) {
+    while (state.estado.vueltas === true) {
+      actualizarTimer();
+    }
+  } else if (state.estado.active === true) {
+    actualizarTimer();
+    quitarStartTimer();
+    state.estado.ready = false;
+  }
+};
 //empezar el timer o cambiar el active
 const startTimer = () => {
-  if (
-    event.keyCode === 32 &&
-    state.estado.active === false &&
-    state.estado.start === true
-  ) {
+  if (state.estado.active === false) {
     timer = new Timer(state);
+    state.estado.vueltas = true;
     state.tiempoInicial = timer.cogerTiempo();
     elements.webAppContainer.style.display = "none";
     state.estado.active = true;
-  } else if (event.keyCode === 32 && state.estado.start === false) {
-    state.estado.start = true;
+  } else {
+    quitarStartTimer();
   }
 };
-//cambiar el color mientras pulsamos o parar el timer
-const timerController = () => {
-  if (
-    event.keyCode === 32 &&
-    state.estado.active === false &&
-    state.estado.start === true
-  ) {
-    elements.numerosTimer.style.color = "#045757";
-  } else if (event.keyCode === 32 && state.estado.active === true) {
-    actualizarTimer();
-    state.estado.start = false;
-  } else if (state.estado.active === true) {
-    actualizarTimer();
-  }
+//quita el event listener del timer
+const quitarStartTimer = () => {
+  state.estado.active = false;
+  window.removeEventListener("keyup", startTimer);
 };
 //al acabar cada ciclo de timer
 const actualizarTimer = () => {
@@ -54,6 +59,9 @@ const actualizarTimer = () => {
   renderLosTiempos(tiempo);
   //poner scramble
   funcionDelScramble();
+  //marcar el estado
+  state.estado.vueltas = false;
+  state.estado.ready = false;
 };
 //render los tiempos
 const renderLosTiempos = tiempo => {
@@ -69,9 +77,9 @@ const funcionDelScramble = () => {
   const scramble = scrambleObject.hacerScramble();
   scrambleView.renderScramble(scramble);
 };
+
 //events del timer
 window.addEventListener("keydown", timerController);
-window.addEventListener("keyup", startTimer);
 window.addEventListener("load", funcionDelScramble);
 //events de la app
 //resetear timer
