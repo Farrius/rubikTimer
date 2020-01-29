@@ -10,28 +10,48 @@ import Scramble from "./models/scrambleModel";
 // estado de la app
 const state = {};
 let timer;
+
 state.estado = [];
 state.listaTiempos = new ListaTiempos();
 //estado del timer
+//saber si esta activo
 state.estado.active = false;
+//saver si esta listo para iniciarse
 state.estado.ready = false;
+//variable necesaria para hacer un unica timeout
+state.estado.hacerTimeOut = true;
 //cambiar el color mientras pulsamos o parar el timer
 const timerController = () => {
   if (event.keyCode === 32 && state.estado.active === false) {
-    setTimeout(() => (state.estado.ready = true), 2000);
+    if (state.estado.hacerTimeOut === true) {
+      state.estado.controlTimeOut = setTimeout(
+        () => (state.estado.ready = true),
+        1000
+      );
+      state.estado.hacerTimeOut = false;
+    }
+    //el event listener para quitar el timeout
+    window.addEventListener("keyup", controlarTimeOut);
     if (state.estado.ready === true) {
+      //event listener para iniciar el timer
       window.addEventListener("keyup", startTimer);
       elements.numerosTimer.style.color = "#045757";
     }
   } else if (event.keyCode === 32 && state.estado.active === true) {
+    //solo actualiza el timer una vez
     while (state.estado.vueltas === true) {
       actualizarTimer();
     }
   } else if (state.estado.active === true) {
     actualizarTimer();
     quitarStartTimer();
-    state.estado.ready = false;
   }
+};
+//limpiar el timeout
+const controlarTimeOut = () => {
+  clearTimeout(state.estado.controlTimeOut);
+  state.estado.ready = false;
+  state.estado.hacerTimeOut = true;
 };
 //empezar el timer o cambiar el active
 const startTimer = () => {
@@ -61,7 +81,6 @@ const actualizarTimer = () => {
   funcionDelScramble();
   //marcar el estado
   state.estado.vueltas = false;
-  state.estado.ready = false;
 };
 //render los tiempos
 const renderLosTiempos = tiempo => {
