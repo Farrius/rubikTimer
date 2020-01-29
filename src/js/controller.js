@@ -10,7 +10,6 @@ import Scramble from "./models/scrambleModel";
 // estado de la app
 const state = {};
 let timer;
-
 state.estado = [];
 state.listaTiempos = new ListaTiempos();
 //estado del timer
