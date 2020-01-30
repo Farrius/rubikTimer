@@ -22,6 +22,7 @@ state.estado.hacerTimeOut = true;
 //cambiar el color mientras pulsamos o parar el timer
 const timerController = () => {
   if (event.keyCode === 32 && state.estado.active === false) {
+    elements.numerosTimer.style.color = "#791422";
     if (state.estado.hacerTimeOut === true) {
       state.estado.controlTimeOut = setTimeout(
         () => (state.estado.ready = true),
@@ -48,6 +49,7 @@ const timerController = () => {
 };
 //limpiar el timeout
 const controlarTimeOut = () => {
+  elements.numerosTimer.style.color = "#e4e4e4";
   clearTimeout(state.estado.controlTimeOut);
   state.estado.ready = false;
   state.estado.hacerTimeOut = true;
