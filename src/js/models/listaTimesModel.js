@@ -5,14 +5,9 @@ export default class ListaTimes {
   //formateo
   formatearSegundosMinutos(tiempo) {
     if (tiempo >= 60) {
-      let tiempos = `${Math.floor(tiempo / 60)}:${Math.round(
-        (tiempo % 60) * 100
-      ) / 100}`;
-      if (tiempos.includes(".")) {
-        if (tiempos.split(".")[1].split("").length !== 2) tiempos += "0";
-      } else {
-        tiempos += ".00";
-      }
+      let tiempos = this.comprovarRedondeoDecimas(
+        `${Math.floor(tiempo / 60)}:${Math.round((tiempo % 60) * 100) / 100}`
+      );
       if (tiempos.includes(":")) {
         if (
           tiempos
@@ -28,14 +23,20 @@ export default class ListaTimes {
       }
       return tiempos;
     } else {
-      let tiempos = `${Math.round(tiempo * 100) / 100}`;
-      if (tiempos.includes(".")) {
-        if (tiempos.split(".")[1].split("").length !== 2) tiempos += "0";
-      } else {
-        tiempos += ".00";
-      }
+      let tiempos = this.comprovarRedondeoDecimas(
+        `${Math.round(tiempo * 100) / 100}`
+      );
       return tiempos;
     }
+  }
+  comprovarRedondeoDecimas(tiempos) {
+    if (tiempos.includes(".")) {
+      if (tiempos.split(".")[1].split("").length !== 2) tiempos += "0";
+      if (tiempos.split(".")[0].split("").length !== 2) tiempos = "0" + tiempos;
+    } else {
+      tiempos += ".00";
+    }
+    return tiempos;
   }
   //state methods
   subirAlState(tiempo) {
@@ -98,4 +99,3 @@ export default class ListaTimes {
     localStorage.clear();
   }
 }
-const s = new ListaTimes();

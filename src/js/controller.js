@@ -88,7 +88,8 @@ const renderLosTiempos = tiempo => {
   timerView.renderTiempoFormateado(tiempo);
   const mediaAo5 = state.listaTiempos.mediaA05(state.listaTiempos.lista);
   const mediaAoAll = state.listaTiempos.mediaAll(state.listaTiempos.lista);
-  listaTimesView.renderTimeEnTabla(tiempo, mediaAo5, mediaAoAll);
+  const tiempoFormat = state.listaTiempos.formatearSegundosMinutos(tiempo);
+  listaTimesView.renderTimeEnTabla(tiempoFormat, mediaAo5, mediaAoAll);
   ao5View.renderAo5(mediaAo5);
 };
 //hacer scramble

@@ -8,7 +8,6 @@ export const renderTimeEnTabla = (time, ao5, aoAll) => {
   newTimeTd.textContent = time;
   newAo5Td.textContent = ao5;
   newAoAll.textContent = aoAll;
-  newRow.classList.add("row");
 };
 
 export const resetTabla = () => {
