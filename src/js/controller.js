@@ -9,9 +9,14 @@ import ListaTiempos from "./models/listaTimesModel";
 import Scramble from "./models/scrambleModel";
 // estado de la app
 const state = {};
+//iniciar el timer
 let timer;
+//creamos el estado en una array
 state.estado = [];
-state.listaTiempos = new ListaTiempos();
+//inicializamos la lista de tiempos
+state.listaTiempos = new ListaTiempos(state);
+//saber si la los tiempos vienen del local storage
+state.localStorage = false;
 //estado del timer
 //saber si esta activo
 state.estado.active = false;
@@ -26,7 +31,7 @@ const timerController = () => {
     if (state.estado.hacerTimeOut === true) {
       state.estado.controlTimeOut = setTimeout(
         () => (state.estado.ready = true),
-        1000
+        500
       );
       state.estado.hacerTimeOut = false;
     }
@@ -84,10 +89,25 @@ const actualizarTimer = () => {
   state.estado.vueltas = false;
 };
 //render los tiempos
+let listaTiempos;
 const renderLosTiempos = tiempo => {
+  const lengthDelTrueStorage = state.listaTiempos.lista.length;
   timerView.renderTiempoFormateado(tiempo);
-  const mediaAo5 = state.listaTiempos.mediaA05(state.listaTiempos.lista);
-  const mediaAoAll = state.listaTiempos.mediaAll(state.listaTiempos.lista);
+  if (state.localStorage === true) {
+    listaTiempos = [...state.listaTiempos.lista]
+      .slice(
+        0,
+        state.listaTiempos.lista.indexOf(
+          tiempo,
+          lengthDelTrueStorage - state.lengthDelStorage
+        ) + 1
+      )
+      .reverse();
+  } else {
+    listaTiempos = [...state.listaTiempos.lista];
+  }
+  const mediaAo5 = state.listaTiempos.mediaA05(listaTiempos);
+  const mediaAoAll = state.listaTiempos.mediaAll(listaTiempos);
   const tiempoFormat = state.listaTiempos.formatearSegundosMinutos(tiempo);
   listaTimesView.renderTimeEnTabla(tiempoFormat, mediaAo5, mediaAoAll);
   ao5View.renderAo5(mediaAo5);
@@ -111,9 +131,9 @@ elements.resetButton.addEventListener("click", () => {
 });
 //quitar un tiempo
 elements.listaTiempos.addEventListener("click", e => {
-  const row = e.target.parentElement.matches(".row");
-  if (row) {
-    const actualRow = e.target.parentElement;
+  const deleteIcon = e.target.parentElement.matches(".delete_icon");
+  if (deleteIcon) {
+    const actualRow = e.target.parentElement.parentElement;
     const tableNode = actualRow.parentNode.children;
     const tableArray = [...tableNode];
     const indexElement = tableArray.indexOf(actualRow);
@@ -124,7 +144,10 @@ elements.listaTiempos.addEventListener("click", e => {
 //cargar local storage
 window.addEventListener("load", () => {
   state.listaTiempos.cogerLocalStorage();
-  state.listaTiempos.lista.reverse().forEach(cur => {
+  state.lengthDelStorage = state.listaTiempos.lista.length;
+  state.listaTiempos.lista.forEach(cur => {
     renderLosTiempos(cur);
+    state.lengthDelStorage--;
   });
+  state.localStorage = false;
 });

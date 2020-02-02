@@ -52,11 +52,13 @@ body {
         background: $azul-oscuro;
         margin-bottom: 25px;
         height: 320px;
-        min-width: 155px;
+        min-width: 220px;
         overflow-y: scroll;
         .tabla_de_tiempos {
           tr {
             th {
+              width: 65px;
+              max-width: 65px;
               padding: 1rem;
               padding-bottom: 0.35rem;
             }
@@ -64,18 +66,10 @@ body {
               text-align: center;
               border: 1px solid $negro;
               padding: 1rem 0.3rem;
-              a:link,
-              a:visited,
-              a:hover,
-              a:active {
-                text-decoration: none;
-                color: $azul;
-                margin-left: 1px;
-              }
             }
-            .delete {
+            .delete_icon {
               border: none;
-              padding: 0;
+              padding: 1px;
             }
           }
         }

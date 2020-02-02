@@ -1,5 +1,6 @@
 export default class Sramble {
   constructor() {}
+  //funcion que nos crea un scramble
   hacerScramble() {
     const listaAllMoves = [
       "R",

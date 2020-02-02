@@ -1,6 +1,7 @@
 export default class ListaTimes {
-  constructor() {
+  constructor(state) {
     this.lista = [];
+    this.state = state;
   }
   //formateo
   formatearSegundosMinutos(tiempo) {
@@ -66,7 +67,7 @@ export default class ListaTimes {
     return mediaArray;
   }
   mediaA05(tiempos) {
-    if (this.lista.length >= 5) {
+    if (tiempos.length >= 5) {
       const ultimos5 = tiempos.slice(0, 5);
       const masBajo = Math.min(...ultimos5);
       const masAlto = Math.max(...ultimos5);
@@ -76,8 +77,8 @@ export default class ListaTimes {
       ultimos5.splice(indexBajo, 1);
       const mediaAo5 = this.hacerMediaArray(ultimos5);
       return mediaAo5;
-    } else if (this.lista.length > 0) {
-      return this.hacerMediaArray(this.lista);
+    } else if (tiempos.length > 0) {
+      return this.hacerMediaArray(tiempos);
     }
   }
   mediaAll(tiempos) {
@@ -93,7 +94,8 @@ export default class ListaTimes {
   }
   cogerLocalStorage() {
     const storage = JSON.parse(localStorage.getItem("tiempos"));
-    if (storage) this.lista = storage;
+    if (storage) this.lista = storage.reverse();
+    this.state.localStorage = true;
   }
   resetLocalStorage() {
     localStorage.clear();
