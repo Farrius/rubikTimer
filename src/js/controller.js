@@ -93,6 +93,7 @@ let listaTiempos;
 const renderLosTiempos = tiempo => {
   const lengthDelTrueStorage = state.listaTiempos.lista.length;
   timerView.renderTiempoFormateado(tiempo);
+  //modificar nuestar lista dependiendo si viene del local storage
   if (state.localStorage === true) {
     listaTiempos = [...state.listaTiempos.lista]
       .slice(
